@@ -1,15 +1,10 @@
 class User {
-  constructor({ id, username, email, password, firstName, lastName, role = 'author', isActive = true, createdAt, updatedAt }) {
+  constructor({ id, email, firstName, lastName, createdAt}) {
     this.id = id;
-    this.username = username;
     this.email = email;
-    this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.role = role;
-    this.isActive = isActive;
     this.createdAt = createdAt || new Date();
-    this.updatedAt = updatedAt || new Date();
   }
 
   getFullName() {
@@ -23,27 +18,35 @@ class User {
         this[field] = data[field];
       }
     });
-    this.updatedAt = new Date();
   }
 
-  deactivate() {
-    this.isActive = false;
-    this.updatedAt = new Date();
+  static isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
-  activate() {
-    this.isActive = true;
-    this.updatedAt = new Date();
+  static isValidPassword(password) {
+    return password && password.length >= 6;
   }
 
-  hasPermission(action) {
-    const permissions = {
-      admin: ['create', 'read', 'update', 'delete', 'publish', 'manage_users'],
-      editor: ['create', 'read', 'update', 'delete', 'publish'],
-      author: ['create', 'read', 'update']
+  static fromDatabase(row) {
+    return new User({
+      id: row.iduser,
+      email: row.email,
+      firstName: row.first_name,
+      lastName: row.last_name,
+      createdAt: row.created_at,
+    });
+  }
+
+  toDatabase() {
+    return {
+      iduser: this.id,
+      email: this.email,
+      first_name: this.firstName,
+      last_name: this.lastName,
+      created_at: this.createdAt,
     };
-
-    return permissions[this.role]?.includes(action) || false;
   }
 }
 

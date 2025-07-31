@@ -1,15 +1,11 @@
-# Express.js Clean Architecture Template
+# Personal API Blog from Express.js Clean Architecture Template
 
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-5.x-blue.svg)](https://expressjs.com/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange.svg)](https://www.mysql.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A production-ready **Express.js template** implementing **Clean Architecture** principles with **MySQL integration**, designed for scalable and maintainable backend applications.
-
-## 🎯 Why This Template?
-
-The creation of this Express.js template arose from the need to have a **full well-designed backend** that can be used **immediately** for production projects, without spending time on architectural decisions and boilerplate setup.
+A Personal API Blog to implement in a web
 
 ### ✨ Key Features
 
@@ -49,10 +45,6 @@ The creation of this Express.js template arose from the need to have a **full we
    cp .env.example .env
    # Edit .env with your MySQL credentials
    ```
-
-4. **Setup database**
-   - Create MySQL database
-   - Run SQL scripts from `database/create_tables.sql`
 
 5. **Start the server**
    ```bash
@@ -96,8 +88,6 @@ GET    /api/users              # Get all users
 GET    /api/users/:id          # Get user by ID
 POST   /api/users              # Create new user
 PUT    /api/users/:id          # Update user profile
-PATCH  /api/users/:id/activate # Activate user
-PATCH  /api/users/:id/deactivate # Deactivate user
 DELETE /api/users/:id          # Delete user
 ```
 
@@ -203,7 +193,6 @@ class CreateUserUseCase {
 ## 📚 Documentation
 
 - **[Architecture Guide](ARCHITECTURE.md)** - Detailed architecture explanation
-- **[API Examples](examples/)** - Usage examples
 
 ## ✅ Benefits
 

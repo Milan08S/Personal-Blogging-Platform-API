@@ -1,10 +1,8 @@
-class IUserRepository {
-  async findAll() {
-    throw new Error('Method findAll must be implemented');
-  }
+const IBaseRepository = require('./IBaseRepository');
 
-  async findById(id) {
-    throw new Error('Method findById must be implemented');
+class IUserRepository extends IBaseRepository {
+  constructor() {
+    super();
   }
 
   async findByEmail(email) {
@@ -15,20 +13,12 @@ class IUserRepository {
     throw new Error('Method findByUsername must be implemented');
   }
 
-  async create(user) {
-    throw new Error('Method create must be implemented');
+  async emailExists(email) {
+    throw new Error('Method emailExists must be implemented');
   }
 
-  async update(id, userData) {
-    throw new Error('Method update must be implemented');
-  }
-
-  async delete(id) {
-    throw new Error('Method delete must be implemented');
-  }
-
-  async exists(email, username) {
-    throw new Error('Method exists must be implemented');
+  async findByFullName(firstName, lastName) {
+    throw new Error('Method findByFullName must be implemented');
   }
 }
 
