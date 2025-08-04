@@ -233,3 +233,7 @@ If you have any questions or need help, please:
 **Ready to build something amazing?** 🚀
 
 Start your next project with this template and focus on what matters - your business logic!
+
+## Note
+
+This project its going to be use in www.dolceana.com as part of a land page for the brand 
