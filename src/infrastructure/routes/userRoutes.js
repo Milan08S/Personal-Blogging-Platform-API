@@ -1,18 +1,34 @@
 const express = require('express');
-const ControllerFactory = require('../factories/ControllerFactory');
 const { validateUserData } = require('../middleware/validation');
+const DIContainer = require('../config/DIContainer');
 
 function createUserRoutes() {
   const router = express.Router();
-  const factory = new ControllerFactory();
+  const container = new DIContainer();
   
-  const userController = factory.createUserController();
+  const userController = container.get('userController');
+  const authMiddleware = container.get('authMiddleware');
 
   router.get('/', userController.getUsers.bind(userController));
   router.get('/:id', userController.getUserById.bind(userController));
-  router.post('/', validateUserData, userController.createUser.bind(userController));
-  router.put('/:id', userController.updateUser.bind(userController));
-  router.delete('/:id', userController.deleteUser.bind(userController));
+  
+  router.post('/', 
+    authMiddleware.authenticate(), 
+    validateUserData, 
+    userController.createUser.bind(userController)
+  );
+  
+  router.put('/:id', 
+    authMiddleware.authenticate(),
+    authMiddleware.ownerOrAdmin(),
+    userController.updateUser.bind(userController)
+  );
+  
+  router.delete('/:id', 
+    authMiddleware.authenticate(),
+    authMiddleware.requireRole(['admin']),
+    userController.deleteUser.bind(userController)
+  );
 
   return router;
 }

@@ -3,6 +3,7 @@ const dbConnection = require('../database/DatabaseConnection');
 
 class BaseRepository extends IBaseRepository{
   constructor(tableName, entityClass) {
+    super(); 
     this.tableName = tableName;
     this.EntityClass = entityClass;
     this.cache = new Map();

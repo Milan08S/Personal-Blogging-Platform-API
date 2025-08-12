@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const routes = require('./infrastructure/routes');
 const errorHandler = require('./infrastructure/middleware/errorHandler');
 
@@ -16,12 +17,16 @@ class App {
   setupMiddleware() {
     this.app.use(helmet());
     
-    this.app.use(cors());
+    this.app.use(cors({
+      origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+      credentials: true,
+    }));
   
     this.app.use(morgan('combined'));
     
     this.app.use(express.json({ limit: '10mb' }));
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cookieParser());
   }
 
   setupRoutes() {

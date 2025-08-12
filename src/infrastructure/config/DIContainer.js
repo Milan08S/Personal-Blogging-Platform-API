@@ -1,4 +1,3 @@
-// Container SIMPLE y MODULAR para manejar todas las dependencias
 class DIContainer {
   constructor() {
     this.dependencies = new Map();
@@ -9,6 +8,8 @@ class DIContainer {
     const UserDIConfig = require('./modules/UserDIConfig');
     UserDIConfig.register(this);
 
+    const AuthDIConfig = require('./modules/AuthDIConfig');
+    AuthDIConfig.register(this);
   }
 
   register(name, dependency) {

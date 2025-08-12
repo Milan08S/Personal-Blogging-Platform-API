@@ -21,6 +21,15 @@ class UserRepository extends BaseRepository {
     }
   }
 
+  async findByUsername(username) {
+    try {
+      const user = await this.findBy('username', username);
+      return user.length > 0 ? user[0] : null;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async findByFullName(firstName, lastName) {
     try {
       const pool = await this.getPool();
@@ -31,7 +40,6 @@ class UserRepository extends BaseRepository {
       
       return rows.map(row => User.fromDatabase(row));
     } catch (error) {
-      console.error('❌ Error in findByFullName:', error);
       throw new Error('Database error while searching users by name');
     }
   }
@@ -48,7 +56,6 @@ class UserRepository extends BaseRepository {
     _validateInterface() {
     const userInterface = new IUserRepository();
     
-    // Verificar que implementa todos los métodos requeridos
     const requiredMethods = Object.getOwnPropertyNames(IUserRepository.prototype)
       .filter(method => method !== 'constructor');
     

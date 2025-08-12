@@ -2,27 +2,16 @@ const express = require('express');
 const router = express.Router();
 
 const createUserRoutes = require('./userRoutes');
+const createAuthRoutes = require('./authRoutes');
 
 router.get('/', (req, res) => {
   res.json({
     message: 'Welcome to the User Management API',
-    version: '1.0.0',
-    documentation: {
-      users: {
-        baseUrl: '/api/users',
-        endpoints: {
-          'GET /': 'Get all users',
-          'GET /:id': 'Get user by ID',
-          'POST /': 'Create new user',
-          'PUT /:id': 'Update user',
-          'DELETE /:id': 'Delete user'
-        }
-      }
-    }
+    version: '1.0.0'
   });
 });
 
-// Mount entity routes
 router.use('/users', createUserRoutes());
+router.use('/auth', createAuthRoutes());
 
 module.exports = router;

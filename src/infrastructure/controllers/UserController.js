@@ -1,8 +1,10 @@
 class UserController {
-  constructor(createUserUseCase, updateUserProfileUseCase, deactivateUserUseCase, activateUserUseCase, userRepository) {
+  constructor(createUserUseCase, updateUserProfileUseCase, deactivateUserUseCase, getUserByIdUseCase, getUsersUseCase, activateUserUseCase, userRepository) {
     this.createUserUseCase = createUserUseCase;
     this.updateUserProfileUseCase = updateUserProfileUseCase;
     this.deactivateUserUseCase = deactivateUserUseCase;
+    this.getUserByIdUseCase = getUserByIdUseCase;
+    this.getUsersUseCase = getUsersUseCase;
     this.activateUserUseCase = activateUserUseCase;
     this.userRepository = userRepository;
   }
